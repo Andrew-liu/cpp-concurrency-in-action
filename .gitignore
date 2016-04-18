@@ -29,6 +29,7 @@
 *.exe
 *.out
 *.app
+main
 
 # Clion
 .idea/
