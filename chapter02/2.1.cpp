@@ -47,6 +47,7 @@ public:
         }
         cout << "the thread has joined..." << endl;
     }
+    // 拷贝构造函数和拷贝赋值操作被标记为=delete, 是为了不让编译器自动生成它们. 直接对一个对象进行拷贝或赋值是危险的，因为这可能会弄丢已经加入的线程
     ThreadGuard(const ThreadGuard& thread) = delete;
     ThreadGuard& operator=(const ThreadGuard& rhs) = delete;
 
@@ -89,6 +90,6 @@ int main() {
     Func my_func(some_local_para);
     thread thread_three(my_func);
     ThreadGuard thread_guard(thread_three);
-    do_something_throw_exception();  // 此处抛出异常, thread_throw依然能被安全销毁
+    do_something_throw_exception();  // 此处抛出异常, thread_three依然能被安全销毁
     return 0;  // 不等待线程的结束直接退出
 }
